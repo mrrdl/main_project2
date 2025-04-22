@@ -1,0 +1,97 @@
+<%- include('./partials/header') %>
+
+    <% if (success.length > 0) { %>
+        <!-- Success message -->
+        <div class="absolute top-5 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white p-3 rounded-md shadow-lg">
+            <span><%= success %></span>
+        </div>
+    <% } %>
+
+    <% if (already.length > 0) { %>
+        <!-- Success message -->
+        <div class="absolute top-5 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white p-3 rounded-md shadow-lg">
+            <span><%= already %></span>
+        </div>
+    <% } %>
+
+<!-- Main Content -->
+<div class="w-full h-screen flex items-start px-10 py-10 bg-gray-100">
+
+    <!-- Sidebar -->
+    <div class="w-1/4 flex h-screen flex-col items-start pr-10">
+
+        <!-- Sort By Dropdown -->
+        <div class="flex items-center gap-2 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700">Sort by</h3>
+            <form action="/shop">
+                <select class="border border-gray-300 px-3 py-2 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" name="sortby" id="">
+                    <option value="popular">Popular</option>
+                    <option value="newest" >Newest</option>
+                </select>
+            </form>
+        </div>
+
+        <!-- Categories Links -->
+        <div class="flex flex-col space-y-4 mb-16">
+            <a class="text-lg font-medium text-gray-600 hover:text-gray-900 transition" href="/products/newest">New Collection</a>
+            <a class="text-lg font-medium text-gray-600 hover:text-gray-900 transition" href="/shop">All Products</a>
+            <a class="text-lg font-medium text-gray-600 hover:text-gray-900 transition" href="/products/discount">Discounted Products</a>
+        </div>
+
+        <!-- Filter Options -->
+        <div class="flex flex-col space-y-4">
+            <h2 class="text-lg font-medium text-gray-600">Filter by :</h2>
+            <a class="text-lg font-medium text-gray-600 hover:text-gray-900 transition" href="/products/availablity=true" >Availability</a>
+            <div>
+                <a class="text-lg font-medium text-gray-600">Discount</a>
+                <div class="mt-2 flex flex-col space-y-2">
+                  <input type="number" id="minDiscount" placeholder="Min Amount" class="p-2 border rounded-lg" min="0" max="100 "/>
+                  <input type="number" id="maxDiscount" placeholder="Max Amount" class="p-2 border rounded-lg" min="0" max="100" />
+                  <button onclick="filterByDiscount()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                    Show Products
+                  </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="w-3/4 grid grid-cols-3 gap-8 max-h-screen overflow-auto">
+        <% products.forEach(function(product){ %>
+        <!-- Product Card -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Product Image -->
+            <div class="w-full h-52 flex items-center justify-center bg-[#<%= product.bgcolor %>]">
+                <img class="h-48 object-contain" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="image">
+            </div>
+            <!-- Product Info -->
+            <div class="flex justify-between bg-[#<%= product.panelcolor %>] items-center px-4 py-4 text-[#<%= product.textcolor %>]">
+                <div>
+                    <h3 class="font-semibold text-lg"><%= product.name %></h3>
+                    <h3 class="font-semibold text-sm"><%= product.description %></h3>
+                    <h4 class="text-sm">₹ <%= product.price %></h4>
+                </div>
+                <a class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white" href="/addcart/<%= product._id %>">
+                    <i class="ri-add-line"></i>
+                </a>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include('./partials/footer') %>
+<script>
+    function filterByDiscount() {
+      const min = document.getElementById("minDiscount").value;
+      const max = document.getElementById("maxDiscount").value;
+
+      if (min === "" || max === "") {
+        alert("Please enter both minimum and maximum discount values.");
+        return;
+      }
+
+      // Redirect with query params (you can customize this)
+      window.location.href = `/products/discount?discount_min=${min}&discount_max=${max}`;
+    }
+</script>

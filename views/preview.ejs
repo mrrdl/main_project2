@@ -1,0 +1,21 @@
+<%- include('./partials/header') %>
+<body class="bg-gray-100 p-6">
+    <h1 class="text-2xl font-bold mb-4">Product List</h1>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% products.forEach(product => { %>
+        <div class="bg-white p-4 rounded-lg shadow">
+          <h2 class="text-xl font-semibold"><%= product.name %></h2>
+          <p class="text-gray-700 mb-2">Price: ₹<%= product.price %></p>
+          <p class="text-gray-700 mb-2">Discount: ₹<%= product.discount %></p>
+  
+          <p class="mt-2 font-medium text-sm text-white px-2 py-1 inline-block rounded 
+                     <%= product.availability === 'true' ? 'bg-green-500' : 'bg-red-500' %>">
+            <%= product.availablity === 'true' ? 'Available' : 'Unavailable' %>
+          </p>
+          <img class="h-48 object-contain justify-right mt-2" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="image">
+        </div>
+      <% }) %>
+    </div>
+</body>
+<%- include('./partials/footer') %>
