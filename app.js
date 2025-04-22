@@ -29,7 +29,5 @@ app.use("/owners",ownerRouter)
 app.use("/users",userRouter)
 app.use("/products",productRouter)
 
-app.listen(3000)
-
 
 module.exports = app;
