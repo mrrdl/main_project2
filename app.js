@@ -23,7 +23,7 @@ app.use(
     })
 )
 app.use(flash())
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname,'views')))
 app.use('/',index)
 app.use("/owners",ownerRouter)
 app.use("/users",userRouter)
