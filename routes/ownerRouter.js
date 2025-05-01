@@ -15,7 +15,7 @@ router.post('/createuser',async (req,res) => {
     let{fullname,email,password}=req.body
     let owner=await ownerModel.findOne({email:email})
     if(owner){
-        bcrypt.compare(password,owner.password,(err,result) => {
+        const result=password===owner.password
             if(result){
                 const token=generateToken(owner)
                 res.cookie("token",token)
