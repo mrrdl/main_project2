@@ -29,20 +29,8 @@ router.post('/createuser',async (req,res) => {
         })
     }
     else{
-        bcrypt.genSalt(10,(err,salt) => {
-            bcrypt.hash(password,salt,async (err,hash) => {
-                let createOwner=await ownerModel.create({
-                    fullname,
-                    email,
-                    password:hash
-                })
-                let token=generateToken(createOwner)
-                res.cookie("token",token)
-
-                req.flash("Success","Owner Created Successfully")
-                res.redirect('/owners/admin')
-            })
-        })
+        req.flash("fail","Invalid Email or Password")
+        return res.redirect('/owners/create')
     }
 })
 
@@ -68,13 +56,15 @@ router.get("/admin", async (req, res) => {
       const login = req.flash("login");
       const falseLog = req.flash("false");
       const Success = req.flash("Success");
+      const fail=req.flash("fail")
   
       res.render("createProduct", {
         success,
         user,
         login,
         Success,
-        falseLog
+        falseLog,
+        fail
       });
   
     } catch (err) {
