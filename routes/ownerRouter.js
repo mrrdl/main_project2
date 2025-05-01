@@ -26,8 +26,7 @@ router.post('/createuser',async (req,res) => {
                 req.flash("false","Login Fail")
                 return res.redirect('/owners/create')
             }
-        })
-    }
+        }
     else{
         req.flash("fail","Invalid Email or Password")
         return res.redirect('/owners/create')
