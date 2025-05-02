@@ -71,9 +71,9 @@
                     <h3 class="font-semibold text-sm"><%= product.description %></h3>
                     <h4 class="text-sm">₹ <%= product.price %></h4>
                 </div>
-                <a class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white" href="/addcart/<%= product._id %>">
-                    <i class="ri-add-line"></i>
-                </a>
+                <form action="/addcart/<%= product._id %>" method="post" class="mt-6">
+                    <button class="bg-[#<%= product.bgcolor %>] hover:bg-[#<%= product.panelcolor %>] text-white px-2 py-1 rounded-md transition" type="submit">Add</button>
+                </form>
             </div>
         </div>
         <% }) %>

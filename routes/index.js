@@ -31,11 +31,13 @@ router.post('/addcart/:id',isloggedin,async (req,res) => {
     })
     if(prodExist){
         req.flash("already","Product exist in cart!")
+        res.redirect('/shop')
     }
     else{
         user.cart.push(productId)
         await user.save()
-        req.flash("success","product added to cart")
+        req.flash("success","Product added to cart")
+        res.redirect('/shop')
     }
 })
 
