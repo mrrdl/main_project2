@@ -23,7 +23,7 @@ router.get('/cart',isloggedin,async (req,res) => {
     res.render("cart",{user,product})
 })
 
-router.get('/addcart/:id',isloggedin,async (req,res) => {
+router.post('/addcart/:id',isloggedin,async (req,res) => {
     const productId=req.params.id
     let user=await userModel.findOne({email:req.user.email})
     let prodExist=user.cart.some(product =>{ 
