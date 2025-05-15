@@ -75,4 +75,10 @@ router.get('/newest',async (req,res) => {
     res.render('shop',{products,success,already})
 })
 
+router.post('/removedb/:id',async (req,res) => {
+  const id=req.params.id
+  const product=await productModel.findByIdAndDelete(id)
+  res.redirect('/products/allproducts')
+})
+
 module.exports=router

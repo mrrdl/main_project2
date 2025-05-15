@@ -1,6 +1,7 @@
 const express = require('express')
 const router=express.Router()
 const ownerModel=require('../models/owner')
+const  productModel=require('../models/product')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 const { generateToken } = require('../utils/generateToken')

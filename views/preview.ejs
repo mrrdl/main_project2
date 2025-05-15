@@ -13,6 +13,9 @@
                      <%= product.availability === 'true' ? 'bg-green-500' : 'bg-red-500' %>">
             <%= product.availablity === 'true' ? 'Available' : 'Unavailable' %>
           </p>
+          <form action="removedb/<%= product._id %>" method="post" class="mt-6">
+                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition" type="submit">Delete Product</button>
+          </form>
           <img class="h-48 object-contain justify-right mt-2" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="image">
         </div>
       <% }) %>

@@ -8,6 +8,7 @@ const userRouter=require('./routes/userRouter')
 const index=require('./routes/index')
 const flash=require('connect-flash')
 const expressSession=require('express-session')
+const mongoose=require('mongoose')
 
 require('dotenv').config()
 
@@ -30,3 +31,7 @@ app.use("/users",userRouter)
 app.use("/products",productRouter)
 
 module.exports = app;
+
+app.listen(process.env.PORT || 5000,()=>{
+    console.log("Server started on port 3000")
+})
