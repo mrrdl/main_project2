@@ -1,7 +1,9 @@
 const mongoose=require('mongoose') 
 
-mongoose.connect('mongodb+srv://mmradul38:mradul%409821@cluster0.dbgaivd.mongodb.net/mydb?retryWrites=true&w=majority')
-
+mongoose.connect('process.env.MONGO_URL', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 const userSchema=mongoose.Schema({
     fullname:{
         type:String,
